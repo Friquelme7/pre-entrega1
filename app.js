@@ -1,60 +1,58 @@
-let ciclo = false;
-let precio = 0;
-let precioFinal = 0;
-let cantidadPersona = 0;
-let cantidadHades = 0;
-let cantidadPokemon = 0;
-let cantidadFifa = 0;
-let cantidadTotal = 0;
-const PERSONA = 15000;
-const HADES = 5000;
-const POKEMON = 12000;
-const FIFA = 20000;
+const juegos = [new juego ("Persona 5", 40000, ["combate por turnos", " novela visual"], ["ps5", "pc", "xbox s"], "un solo jugador", "ingles"),
+                new juego ("Hades", 15000, ["roguelike", " accion"], ["ps5", "pc"], "un solo jugador", ["ingles, español"]),
+                new juego ("Hollow knight", 15000, ["plataformas", " 2D"], ["ps5", "pc", "xbox s"], "un solo jugador", ["ingles", "español"]),
+                new juego ("It takes two", 50000, ["cooperativo", " puzzle"], ["ps5", "pc"], "multijugador", ["ingles, español"]),
+                new juego ("Stardew valley", 10000, ["simulador", " 2D"], "pc", ["multijugador", "un solo jugador"], ["ingles, español"]),
+                new juego ("God of war", 60000, ["accion", " aventura"], ["ps5, pc"], "un solo jugador", ["ingles, español"]),
+                new juego ("Forza motorsport", 50000, ["carreras", " simulacion"], ["xbox s", "pc"], ["multijugador", "un solo jugador"], ["ingles, español"])
+];
 
-alert("Bienvenido a Ustore");
+const carrito = [];
 
-do{
-    ciclo = prompt("Ingrese los juegos que quiere añadir al carrito 🛒 \nPersona - 15.000$ \nHades - 5.000$ \nPokemon - 12.000$ \nFifa - 20.000$ \nesc - para dejar de comprar")
-
-    switch(ciclo){
-        case "persona":
-            precio = precio + PERSONA;
-            cantidadPersona++;
-            alert("Agregaste Persona al carrito ✨")
-            break;
-
-        case "hades":
-            precio = precio + HADES;
-            cantidadHades++;
-            alert("Agregaste Hades al carrito ✨")
-            break;
-
-        case "pokemon":
-            precio = precio + POKEMON;
-            cantidadPokemon++;
-            alert("Agregaste Pokemon al carrito ✨")
-            break;
-
-        case "fifa":
-            precio = precio + FIFA;
-            cantidadFifa++;
-            alert("Agregaste Fifa al carrito ✨")
-            break;
-
-        case "esc":
-            break;
-
-        default:
-            alert("Ese juego no esta en nuestro catalogo :(")
-            break;
+function listaJuegos(){
+    let menu = ``;
+    juegos.forEach((juego, index) => {
+        menu = menu + 
+        `${index + 1} - ${juego.nombre} \n      genero : ${juego.genero} \n      precio : ${juego.precio}$ \n\n`
+    });
+    let dato = prompt(menu);
+    if(dato > 0 && dato <= juegos.length){
+        carrito.push(juegos[dato - 1]);
+        alert(`Usted agrego ${juegos[dato - 1].nombre}`)
+    }
+} 
+function opciones(){
+    let menu = `Bienvenido a U-store :) \n 1 - ver lista de juegos completa \n 2 - filtrar lista \n 3 - ver juegos en descuento \n 4 - ver carrito`;
+    return prompt(menu);
+}
+function buscarJuego(){
+    let menu = `Desea buscar su juego por : \n 1 - nombre \n 2 - genero \n 3 - plataformas`;
+    let dato = +prompt(menu);
+    switch(dato){
+        case 1:
+            let menu1 = `Ingrese el nombre del juego que desea buscar`;
+            let dato2 = prompt(menu1); 
+            const encontrado = juegos.find((jueg) => jueg.nombre === dato2)
+            let dato3 = +prompt(`${encontrado.nombre} \ngenero : ${encontrado.genero}\nplataformas : ${encontrado.plataformas}\nmodo : ${encontrado.modo}\nprecio : ${encontrado.precio}$ \n\n 1 - para agregar al carrito \n 2 - para volver al menu principal`)
+            if(dato3 == 1){
+                carrito.push(encontrado)
+            }else if (dato3 == 2){
+                break
+            };
     }
 
-} while(ciclo !== "esc");
-
-cantidadTotal = cantidadPersona + cantidadHades + cantidadPokemon + cantidadFifa;
-if (precio > 0) {
-    precioFinal = precio + precio; /// los impuestos para juegos de plataformas del estilo Steam son del 100% 
-    alert(`Precio - ${precio} \nPrecio con impuestos incluidos - ${precioFinal} \nUsted compro un total de ${cantidadTotal} juegos`);
-} else{
-        alert("Usted no agrego ningun juego al carrito")
 }
+function menuPrincipal(){
+    let dato;
+    do{
+        dato = opciones();
+        if(dato == 1){
+            listaJuegos();
+        }
+        else if(dato == 2){
+            buscarJuego()
+        }
+    }while(dato != "esc")
+}
+
+menuPrincipal();
