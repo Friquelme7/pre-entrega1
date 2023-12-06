@@ -34,33 +34,65 @@ function listaJuegos() {
 
 
 function opciones() {
-    let menu = `Bienvenido a U-store :) \n 1 - Agregar juegos al carrito \n 2 - Buscar juegos \n 3 - ver juegos en descuento \n 4 - ver carrito`;
-    return prompt(menu);
+    let menu = `Bienvenido a U-store :) \n 1 - Agregar juegos al carrito \n 2 - Buscar juegos \n 3 - Ver carrito`;
+    return prompt(menu).toLowerCase();
 }
 
 function buscarJuego() {
-    let menu = `Desea buscar su juego por : \n 1 - nombre \n 2 - genero \n 3 - plataformas`;
-    let dato = +prompt(menu);
+    let menu = `Desea buscar su juego por : \n 1 - Nombre \n 2 - Genero \n 3 - Plataformas \n 4 - Vovler al menu anterior`;
+    let dato;
+    do {
+        dato = +prompt(menu);
+    } while (dato <= 0 || dato > 4)
     switch (dato) {
         case 1:
             let menu1 = `Ingrese el nombre del juego que desea buscar`;
             let dato2 = prompt(menu1);
-            const encontrado = juegos.find((jueg) => jueg.nombre === dato2)
-            let dato3 = +prompt(`${encontrado.nombre} \ngenero : ${encontrado.genero}\nplataformas : ${encontrado.plataformas}\nmodo : ${encontrado.modo}\nprecio : ${encontrado.precio}$ \n\n 1 - para agregar al carrito \n 2 - para volver al menu principal`)
+            let dato3;
+            const encontrado = juegos.find((jueg) => jueg.nombre.toUpperCase() === dato2.toUpperCase())
+            if (encontrado != undefined) {
+                dato3 = +prompt(`${encontrado.nombre} \ngenero : ${encontrado.genero}\nplataformas : ${encontrado.plataformas}
+            \nmodo : ${encontrado.modo}\nprecio : ${encontrado.precio}$ \n\n 1 - para agregar al carrito \n 2 - para volver al menu principal`)
+            }
+            else {
+                alert("Lo sentimos, ese juego no se encuentra en nuestro catalogo");
+                break;
+            }
             if (dato3 == 1) {
                 carrito.push(encontrado)
+                break
             } else if (dato3 == 2) {
                 break
             };
+        case 2:
+            let menu2 = "ingrese el genero que quiere buscar"
+            let dato4 = prompt(menu2);
+
+        case 3:
+            let menu3 = "ingrese la plataforma que quiere buscar"
+            let dato5 = prompt(menu3);
+        
+        case 4: 
+            break;
     }
+
 }
 
-function verCarrito(){
-    let menu = ``;
-    carrito.forEach((juego, index) => {
-        menu = menu + `${index + 1} - ${juego.nombre} \n      precio : ${juego.precio}$ \n\n`
-    });
-    alert(menu);
+function verCarrito() {
+    let menu = `CARRITO 🛒\n\n`;
+    let total = 0;
+    if (carrito.length > 0) {
+        carrito.forEach((juego, index) => {
+            total += juego.precio;
+            menu = menu + `${index + 1} - ${juego.nombre} \n      precio : ${juego.precio}$ \n\n`
+        });
+        menu = menu + ` Precio total : ${total}$`
+        alert(menu);
+    }
+    else {
+        menu = "CARRITO 🛒\n\nUsted no agregado ningun juego al carrito"
+        alert(menu);
+    }
 }
 function menuPrincipal() {
     let dato;
@@ -72,8 +104,8 @@ function menuPrincipal() {
         else if (dato == 2) {
             buscarJuego()
         }
-        else if (dato == 4){
-
+        else if (dato == 3) {
+            verCarrito()
         }
     } while (dato != "esc")
 }
