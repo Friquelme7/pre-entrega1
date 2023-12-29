@@ -1,10 +1,12 @@
+/*
+
 const juegos = [new juego("Persona 5", 40000, ["combate por turnos", " novela visual"], ["ps5", "pc", "xbox s"], "un solo jugador", "ingles"),
 new juego("Hades", 15000, ["roguelike", " accion"], ["ps5", "pc"], "un solo jugador", ["ingles, español"]),
 new juego("Hollow knight", 15000, ["plataformas", " 2D"], ["ps5", "pc", "xbox s"], "un solo jugador", ["ingles", "español"]),
 new juego("It takes two", 50000, ["cooperativo", " puzzle"], ["ps5", "pc"], "multijugador", ["ingles, español"]),
 new juego("Stardew valley", 10000, ["simulador", " 2D"], "pc", ["multijugador", "un solo jugador"], ["ingles, español"]),
 new juego("God of war", 60000, ["accion", " aventura"], ["ps5, pc"], "un solo jugador", ["ingles, español"]),
-new juego("Forza motorsport", 50000, ["carreras", " simulacion"], ["xbox s", "pc"], ["multijugador", "un solo jugador"], ["ingles, español"])
+new juego("Forza motorsport", 50000, ["carreras", " simulador"], ["xbox s", "pc"], ["multijugador", "un solo jugador"], ["ingles, español"])
 ];
 
 const carrito = [];
@@ -65,17 +67,28 @@ function buscarJuego() {
                 break
             };
         case 2:
-            let menu2 = "ingrese el genero que quiere buscar"
-            let dato4 = prompt(menu2);
+            let menu2 = `Ingrese el genero que quiere buscar \n1 : Combate por turnos\n2 : Novela visual\n3 : Roguelike\n4 : accion\n5 : Plataformas\n6 : 2D\n7 : Cooperativo\n8 : Puzzle\n9 : Simulador\n10 : Aventura\n11 : Carreras`
+            let dato4;
+            do {
+                dato4 = +prompt(menu2);
+            }while(dato4 <= 0 || dato4 > 11)
 
         case 3:
             let menu3 = "ingrese la plataforma que quiere buscar"
             let dato5 = prompt(menu3);
-        
-        case 4: 
+
+        case 4:
             break;
     }
 
+}
+
+function filtrar(dato){
+    let resultado;
+    switch(dato){
+        case 1: return resultado = juegos.filter((juego) => juego.genero == "simulador")
+        debugger;
+    }
 }
 
 function verCarrito() {
@@ -111,3 +124,4 @@ function menuPrincipal() {
 }
 
 menuPrincipal();
+*/
