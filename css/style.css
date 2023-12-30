@@ -6,3 +6,13 @@
 body{
     background-image: url(../media/Umbreon.webp);
 }
+.carrito{
+    width: 44px;
+    height: 44px;
+    fill: white;
+}
+.inv{
+    color: rgba(240, 248, 255, 0);
+    background-color: rgba(240, 248, 255, 0);
+    border: 0;
+}

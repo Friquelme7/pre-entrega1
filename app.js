@@ -1,4 +1,4 @@
-/*
+
 
 const juegos = [new juego("Persona 5", 40000, ["combate por turnos", " novela visual"], ["ps5", "pc", "xbox s"], "un solo jugador", "ingles"),
 new juego("Hades", 15000, ["roguelike", " accion"], ["ps5", "pc"], "un solo jugador", ["ingles, español"]),
@@ -124,4 +124,4 @@ function menuPrincipal() {
 }
 
 menuPrincipal();
-*/
+
